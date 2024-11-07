@@ -1,0 +1,56 @@
+{
+  "author": {
+    "name": "Hutson Betts",
+    "email": "hutson@hyper-expanse.net",
+    "url": "https://gitlab.com/hutson"
+  },
+  "bin": "",
+  "bugs": "https://github.com/nholuongut/releaser-tools/issues",
+  "description": "Release tools built on conventional-changelog.",
+  "engines": {
+    "node": ">=6.9.0"
+  },
+  "files": [],
+  "homepage": "https://github.com/nholuongut/releaser-tools#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "",
+  "name": "releaser-tools",
+  "private": true,
+  "renovate": {
+    "extends": [
+      "config:base",
+      ":maintainLockFilesWeekly",
+      ":rebaseStalePrs",
+      ":automergeDigest",
+      ":gitSignOff",
+      ":preserveSemverRanges"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nholuongut/releaser-tools.git"
+  },
+  "scripts": {
+    "dev": "docker run --rm --user node -v \"$(pwd)\":/app -w /app -it node:4 sh -c \"npm test; npm test; bash\"",
+    "postinstall": "lerna bootstrap",
+    "release": "lerna publish --conventional-commits -m 'chore(release): publish'",
+    "test": "lerna exec npm test"
+  },
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "codecov": "^3.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-xo-space": "^0.34.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "lerna": "^7.0.0",
+    "mocha": "^10.0.0",
+    "nyc": "^15.0.0"
+  }
+}

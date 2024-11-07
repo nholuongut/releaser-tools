@@ -1,0 +1,44 @@
+version: 2
+
+node_10: &node_10
+  docker:
+    - image: node:20
+
+node_12: &node_12
+  docker:
+    - image: node:20
+
+package_manager: &package_manager
+  steps:
+    - checkout
+    - run: |
+        echo "Required until 'npm' 5.2 is the oldest version used by a Node container."
+        currentDirectory=$(pwd)
+        mkdir -p /tmp/npm-install-directory
+        cd /tmp/npm-install-directory
+        npm install npm@latest --no-save
+        rm -rf /usr/local/lib/node_modules
+        mv node_modules /usr/local/lib/
+        cd $currentDirectory
+    - run: |
+        echo "Required because Circle CI changes directory permissions to 777, and 'npm' won't install in that environment."
+        npm install --unsafe-perm
+    - save_cache:
+        paths:
+          - node_modules
+          - ${HOME}/.npm
+        key: dependencies
+    - run: npm test && ($(npm bin)/codecov || echo "Codecov did not collect coverage reports")
+
+jobs:
+  node_10_job:
+    <<: [*node_10, *package_manager]
+  node_12_job:
+    <<: [*node_12, *package_manager]
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - node_10_job
+      - node_12_job

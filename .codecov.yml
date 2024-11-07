@@ -1,0 +1,9 @@
+comment: off
+
+coverage:
+  status:
+    project:
+      conventional-github-releaser:
+        paths: "packages/conventional-github-releaser"
+      conventional-gitlab-releaser:
+        paths: "packages/conventional-gitlab-releaser"

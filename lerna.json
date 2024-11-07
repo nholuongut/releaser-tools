@@ -1,0 +1,15 @@
+{
+  "commands": {
+    "bootstrap": {
+      "hoist": true
+    },
+    "exec": {
+      "concurrency": 1
+    }
+  },
+  "lerna": "2.9.0",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "independent"
+}
